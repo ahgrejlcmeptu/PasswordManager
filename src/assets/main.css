@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#app {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    position: absolute;
+    left: -10%;
+    width: 120%;
+    height: 100vh;
+    background: url(/img/bg.jpg) no-repeat center bottom/cover;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.layer img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    object-fit: cover;
+}
+
+.card-wrapper {
+    display: flex;
+    width: 100%;
+    overflow-y: auto;
+}
+
+.card {
+    margin: auto;
+    position: relative;
+    padding: 60px;
+    background: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-left: 1px solid rgba(255, 255, 255, .25);
+    border-bottom: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 20px;
+    width: 510px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card p {
+    text-align: center;
+    color: #fff;
+    font-size: 1.25em;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card h2 {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 600;
+    color: #fff;
+}
+
+.inputBox {
+    position: relative;
+    width: 100%;
+}
+
+.input-item {
+    width: 100%;
+    position: relative;
+}
+
+
+.input-item.error input {
+    /*border-color: rgba(255, 84, 84, 1);*/
+}
+
+.inputBox-error {
+    margin-top: .5em;
+    font-size: 1.25em;
+    color: rgba(255, 84, 84, 1);
+}
+
+.input-item input {
+    position: relative;
+    width: 100%;
+    padding: 15px 20px;
+    outline: none;
+    font-size: 1.25em;
+    color: #fff;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, .2);
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, .25);
+    border: 1px solid rgba(0, 0, 0, .5);
+}
+
+.input-item .label {
+    pointer-events: none;
+    z-index: 1;
+    font-size: 1.25em;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 15px 20px;
+    color: rgba(255, 255, 255, .8);
+    transition: .3s;
+    transform-origin: 0 50%;
+}
+
+.input-item .label.focus {
+    transform: translateY(-50%) scale(0.8);
+}
+
+.input-item ::placeholder {
+    color: rgba(255, 255, 255, .5);
+}
+
+.btn {
+    position: relative;
+    border: none;
+    outline: none;
+    background: linear-gradient(0deg, #2c3c99, #00b0ff);
+    cursor: pointer;
+    color: #fff;
+    font-weight: 500;
+    box-shadow: none;
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.25em;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.btn-red {
+    background: linear-gradient(0deg, #992c2c, #ff0000);
+}
+
+.card .group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .group a {
+    font-size: 1.25em;
+    color: #fff;
+    text-decoration: none;
+}
+
+.card .group a:last-child {
+    margin-left: auto;
+    text-decoration: underline;
+}
+
+.table {
+    font-size: 1.25em;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.table-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-index {
+    width: 10%;
+    flex-shrink: 0;
+}
+
+.table-name {
+    flex-grow: 1;
+}
+
+.table-btn {
+    width: auto;
+    padding: 10px;
+    font-size: 1em;
+    /*width: 20px;*/
+    /*height: 20px;*/
+}
+
+.table-btn svg,
+.btn svg {
+    width: 30px;
+    height: 30px;
+    fill: #fff;
+    stroke: #fff;
+    display: block;
+    margin: 0 auto;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+}
+
+.popup form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.popup-backdrop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.link {
+    font-size: 1.25em;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    color: #fff;
+}
+
+.f {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.f-w {
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.f a {
+    cursor: pointer;
+    width: 100%;
+}
+
+.checked {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.25em;
+    color: #fff;
+}
+
+p.red {
+    color: rgba(255, 84, 84, 1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #fff;
+}
+td {
+    vertical-align: top;
+    padding: 0 10px;
+}
+td:first-child {
+    padding-left: 0;
+}
+td:last-child {
+    padding-right: 0;
+}
+
+
+td .key {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    max-width: 200px;
+}
+.control {
+    cursor: pointer;
+}
