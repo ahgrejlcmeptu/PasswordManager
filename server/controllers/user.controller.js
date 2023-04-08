@@ -132,32 +132,32 @@ module.exports = {
       });
     }
   },
-  async FirstRegistration({body, params}, res) {
-    const {login, password} = body
-
-    try {
-      const user = await User.findOne({login})
-
-      if (user) {
-        return res.status(403).send({
-          message: "Login уже существует"
-        });
-      }
-
-      const hashPassword = await bcrypt.hash(password, 3);
-      const createsUser = await new User({login, password: hashPassword, isAdmin: true});
-      await createsUser.save();
-
-      const userDto = new UserDto(createsUser)
-      const tokens = TokenService.generateTokens({...userDto})
-      await TokenService.saveToken(userDto.id, tokens.refreshToken)
-
-      return res.status(200).send({
-        message: "Пользователь успешно создан, а ключ удален",
-        user: {...tokens, ...userDto}
-      });
-    } catch (e) {
-      console.log(e)
-    }
-  },
+  // async FirstRegistration({body, params}, res) {
+  //   const {login, password} = body
+  //
+  //   try {
+  //     const user = await User.findOne({login})
+  //
+  //     if (user) {
+  //       return res.status(403).send({
+  //         message: "Login уже существует"
+  //       });
+  //     }
+  //
+  //     const hashPassword = await bcrypt.hash(password, 3);
+  //     const createsUser = await new User({login, password: hashPassword, isAdmin: true});
+  //     await createsUser.save();
+  //
+  //     const userDto = new UserDto(createsUser)
+  //     const tokens = TokenService.generateTokens({...userDto})
+  //     await TokenService.saveToken(userDto.id, tokens.refreshToken)
+  //
+  //     return res.status(200).send({
+  //       message: "Пользователь успешно создан, а ключ удален",
+  //       user: {...tokens, ...userDto}
+  //     });
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // },
 }

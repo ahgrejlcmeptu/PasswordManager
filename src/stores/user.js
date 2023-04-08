@@ -50,17 +50,17 @@ export const useUser = defineStore('user', () => {
     }
   }
 
-  const registerFirst = async (form) => {
-    try {
-      const {data} = await baseAxios.post(`${URL_NAME}/registrationFirst/`, form)
-      console.log(data)
-      saveUser(data)
-      return data
-    } catch (e) {
-      authError.value = e.response.data.message
-      console.error(e)
-    }
-  }
+  // const registerFirst = async (form) => {
+  //   try {
+  //     const {data} = await baseAxios.post(`${URL_NAME}/registrationFirst/`, form)
+  //     console.log(data)
+  //     saveUser(data)
+  //     return data
+  //   } catch (e) {
+  //     authError.value = e.response.data.message
+  //     console.error(e)
+  //   }
+  // }
 
   const refresh = async () => {
     const {data} = await baseAxios.post(`${URL_NAME}/refresh`, {refreshToken: refreshToken.value})
@@ -94,5 +94,5 @@ export const useUser = defineStore('user', () => {
 
   const isAdmin = computed(() => user.value.isAdmin)
 
-  return {user, authError, users, isAdmin, login, logout, refresh, load, register, registerFirst}
+  return {user, authError, users, isAdmin, login, logout, refresh, load, register}
 })

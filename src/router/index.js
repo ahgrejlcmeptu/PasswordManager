@@ -71,14 +71,14 @@ const router = createRouter({
       },
       component: () => import('../views/SignUpView.vue')
     },
-    {
-      path: '/signup',
-      name: 'SignFirst',
-      meta: {
-        layout: 'Other'
-      },
-      component: () => import('../views/SignFirstView.vue')
-    },
+    // {
+    //   path: '/signup',
+    //   name: 'SignFirst',
+    //   meta: {
+    //     layout: 'Other'
+    //   },
+    //   component: () => import('../views/SignFirstView.vue')
+    // },
     // {
     //   path: '/:notFound(.*)',
     //   name: 'notFound',
