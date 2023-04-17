@@ -64,8 +64,7 @@ const router = createRouter({
       component: () => import('../views/SingInView.vue')
     },
     {
-      // path: '/signup/:id',
-      path: '/signup/',
+      path: '/signup',
       name: 'SignUp',
       meta: {
         layout: 'Other'
