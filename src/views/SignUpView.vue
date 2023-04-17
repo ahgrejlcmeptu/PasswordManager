@@ -98,8 +98,8 @@ const submit = async () => {
   }
 
   if (!error && repeat) {
-    const data = await user.registerFirst(dataForm(FormSchema))
-    // const data = await user.register(dataForm(FormSchema), route.query.id)
+    // const data = await user.registerFirst(dataForm(FormSchema))
+    const data = await user.register(dataForm(FormSchema), route.query.id)
     if (data) router.push('/')
   }
 }
