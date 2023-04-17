@@ -8,11 +8,19 @@ export const submitForm = (schema) => {
         error = item.error ? true : error
         return
       }
+
       if (item.min && item.value.length < item.min) {
         item.textError = item.listError[1]
         item.error = true
         error = item.error ? true : error
         return;
+      }
+
+      if (item.mask && validation[item.mask](item.value)) {
+        item.textError = item.listError[1]
+        item.error = true
+        error = item.error ? true : error
+        return
       }
 
       item.error = false
@@ -28,4 +36,16 @@ export const dataForm = (schema) => {
     data[item.name] = item.value
   })
   return data
+}
+
+const validation = {
+  Email(value) {
+    let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    if (!reg.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 }

@@ -8,7 +8,7 @@ const UserDto = require('../dtos/user.dto');
 module.exports = {
   async registration({body, params}, res) {
     const {id} = params
-    const {login, password} = body
+    const {login, email, password} = body
 
     try {
       const registration = await Registration.findOne({activationLink: id})
@@ -19,15 +19,21 @@ module.exports = {
       }
 
       const user = await User.findOne({login})
+      const mail = await User.findOne({email})
 
       if (user) {
         return res.status(403).send({
           message: "Login уже существует"
         });
       }
+      if (mail) {
+        return res.status(403).send({
+          message: "E-mail уже существует"
+        });
+      }
 
       const hashPassword = await bcrypt.hash(password, 3);
-      const createsUser = await new User({login, password: hashPassword});
+      const createsUser = await new User({login, email, status: 'active', password: hashPassword});
       await createsUser.save();
 
       const userDto = new UserDto(createsUser)
@@ -50,6 +56,11 @@ module.exports = {
       if (!foundUser) {
         return res.status(403).send({
           message: "Неверный логин или пароль"
+        });
+      }
+      if (foundUser.status === 'blocked') {
+        return res.status(403).send({
+          message: "Пользователь заблокирован"
         });
       }
 
@@ -122,7 +133,6 @@ module.exports = {
         const userDto = new UserDto(item);
         return {
           ...userDto,
-          activationLink: item.activationLink
         }
       })
       return res.status(200).send(items);
@@ -132,32 +142,25 @@ module.exports = {
       });
     }
   },
-  // async FirstRegistration({body, params}, res) {
-  //   const {login, password} = body
-  //
-  //   try {
-  //     const user = await User.findOne({login})
-  //
-  //     if (user) {
-  //       return res.status(403).send({
-  //         message: "Login уже существует"
-  //       });
-  //     }
-  //
-  //     const hashPassword = await bcrypt.hash(password, 3);
-  //     const createsUser = await new User({login, password: hashPassword, isAdmin: true});
-  //     await createsUser.save();
-  //
-  //     const userDto = new UserDto(createsUser)
-  //     const tokens = TokenService.generateTokens({...userDto})
-  //     await TokenService.saveToken(userDto.id, tokens.refreshToken)
-  //
-  //     return res.status(200).send({
-  //       message: "Пользователь успешно создан, а ключ удален",
-  //       user: {...tokens, ...userDto}
-  //     });
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // },
+  async FirstRegistration({body, params}, res) {
+    const {login, email, password} = body
+
+    try {
+      const hashPassword = await bcrypt.hash(password, 3);
+      const createsUser = await new User({login, email, password: hashPassword, isAdmin: true, status: 'active'});
+      await createsUser.save();
+
+      const userDto = new UserDto(createsUser)
+      const tokens = TokenService.generateTokens({...userDto})
+      await TokenService.saveToken(userDto.id, tokens.refreshToken)
+
+      return res.status(200).send({
+        message: "Пользователь успешно создан",
+        user: {...tokens, ...userDto}
+      });
+
+    } catch (e) {
+      console.log(e)
+    }
+  },
 }

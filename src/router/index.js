@@ -64,21 +64,14 @@ const router = createRouter({
       component: () => import('../views/SingInView.vue')
     },
     {
-      path: '/signup/:id',
+      // path: '/signup/:id',
+      path: '/signup/',
       name: 'SignUp',
       meta: {
         layout: 'Other'
       },
       component: () => import('../views/SignUpView.vue')
     },
-    // {
-    //   path: '/signup',
-    //   name: 'SignFirst',
-    //   meta: {
-    //     layout: 'Other'
-    //   },
-    //   component: () => import('../views/SignFirstView.vue')
-    // },
     // {
     //   path: '/:notFound(.*)',
     //   name: 'notFound',

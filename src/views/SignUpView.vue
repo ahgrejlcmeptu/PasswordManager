@@ -15,9 +15,9 @@
       />
       <p class="red" v-if="user.authError">{{ user.authError }}</p>
       <app-btn type="submit">Регистрация</app-btn>
-<!--      <div class="group">-->
-<!--        <router-link to="/auth">Войти</router-link>-->
-<!--      </div>-->
+      <!--      <div class="group">-->
+      <!--        <router-link to="/auth">Войти</router-link>-->
+      <!--      </div>-->
     </form>
   </the-card>
 </template>
@@ -33,6 +33,8 @@ import {dataForm, submitForm} from "../utils/form";
 
 const router = useRouter()
 const route = useRoute()
+
+console.log(route)
 const user = useUser()
 
 const FormSchema = reactive([
@@ -45,6 +47,15 @@ const FormSchema = reactive([
     error: false,
     required: true,
     min: 3,
+  },{
+    name: 'email',
+    value: '',
+    placeholder: 'E-mail',
+    textError: '',
+    listError: ['Введите e-mail', 'Введите корректный email'],
+    error: false,
+    required: true,
+    mask: 'Email'
   }, {
     name: 'password',
     value: '',
@@ -76,7 +87,8 @@ onMounted(() => {
 
 const submit = async () => {
   const error = submitForm(FormSchema)
-  const repeat = repeatPassword.value === FormSchema[1].value
+  const password = FormSchema.filter(i => i.name === 'password')[0]
+  const repeat = repeatPassword.value === password.value
 
   if (!repeat) {
     repeatPassword.error = true
@@ -86,8 +98,10 @@ const submit = async () => {
   }
 
   if (!error && repeat) {
-    const data = await user.register(dataForm(FormSchema), route.params.id)
+    const data = await user.registerFirst(dataForm(FormSchema))
+    // const data = await user.register(dataForm(FormSchema), route.query.id)
     if (data) router.push('/')
   }
 }
+
 </script>

@@ -39,7 +39,7 @@
         v-if="confirm"
         @accept="accept"
         @reject="confirm = null"
-        title="Удалить товар"
+        title="Удалить пароль"
     />
   </teleport>
 </template>

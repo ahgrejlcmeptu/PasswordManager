@@ -54,7 +54,6 @@ const storeRegistration = useRegistration()
 const router = useRouter()
 const route = useRoute()
 const loading = ref(false)
-console.log(route)
 // const listUser = computed(() => storeUser.users)
 const listKeys = computed(() => storeRegistration.keys)
 
@@ -70,7 +69,7 @@ const create = async () => {
 
 const copyLink = (text) => {
   console.log(location.host)
-  copy(location.host + '/signup/' + text)
+  copy(location.host + '/signup?id=' + text)
 }
 
 </script>
